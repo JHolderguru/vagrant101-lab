@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
    # config.vm.network "forwarded_port", guest: 80, host: 8080,
      # auto_correct: true
-
+  # config.vm.synced_folder ".", "/vagrant", owner: "vagrant", mount_options => ["dmode=777"]
 
 #the reverse output will give me an output nto my running machine ,
   config.vm.network "private_network", ip:"192.167.10.111"
@@ -22,6 +22,10 @@ Vagrant.configure("2") do |config|
 
 #install vagrant pluging
 #vagrant installvagrant-hostsupdater
-  config.hostsupdater.aliases = ["devissocool.local"]
+  config.hostsupdater.aliases = {
+    '192.167.10.111' => ["devissocool.local"]
+    
+}
+  
   
 end

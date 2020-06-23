@@ -18,3 +18,4 @@
 		#### sudo apt-get install nginx -y
 		#### systemctl restart nginx
 		--if ### vagrant destroy to get rid
+####permission denied?
