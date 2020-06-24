@@ -1,10 +1,4 @@
-
-```
-
-3.
-
-```shell
-sudo systemctl enable mongod# Development Env and Vagrant 101
+# Development Env and Vagrant 101
 
 This repo is a vagrant machine that instals nginx as well as expose it on an ip and host name.
 
@@ -90,13 +84,3 @@ sudo apt-get update -y
 sudo apt-get install nginx -y
 
 sudo systemctl start nginx
-```
-
-
-4.
-
-```shell
-sudo sed -i "s,\\(^[[:blank:]]*bindIp:\\) .*,\\1 0.0.0.0," /etc/mongod.conf
-sudo service mongod restart
-sudo systemctl enable mongod
-```
