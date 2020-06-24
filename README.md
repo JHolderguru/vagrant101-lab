@@ -1,71 +1,95 @@
-# Mongodb
 
-## Provision
-
-A script is provisioned by specifying a working directory, a log directory into which output from the script is recorded and a command to execute the script.
-
-
-## Tests
-
-Be sure to look at the vagrant up output as well as the tests to understand what is missing in your provision file.
-
-## How to run tests?
-```bash
-
-cd starter-code
-vagrant up
-vagrant provision
-cd tests
-rake spec
-```
-
-This will identify the tests that you need to pass, in this case there are for tests:
-1. install mangodb 3.2.20
-2. start mangod
-3. enable mangod
-4. post 0.0.0.0
-
-
-It is sometimes necessary to vagrant destroy before re doing the process above to start from a clean state and pass the tests.
-
-```bash
-vagrant destroy
-```
-
-## Provision
-
-To pass the tests changes are made to the provision file.
-
-1. Look at mongodb documentation online on how to install
-
-```shell
-
-wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
-
-echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-sudo apt-get update
-
-
-sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
-
-echo "mongodb-org hold" | sudo dpkg --set-selections
-echo "mongodb-org-server hold" | sudo dpkg --set-selections
-echo "mongodb-org-shell hold" | sudo dpkg --set-selections
-echo "mongodb-org-mongos hold" | sudo dpkg --set-selections
-echo "mongodb-org-tools hold" | sudo dpkg --set-selections
-
-```
-
-2. make sure you look at specific requirement of test, i.e. mongod not mongodb
-```shell
-sudo systemctl start mongod
-sudo systemctl status mongod
 ```
 
 3.
 
 ```shell
-sudo systemctl enable mongod
+sudo systemctl enable mongod# Development Env and Vagrant 101
+
+This repo is a vagrant machine that instals nginx as well as expose it on an ip and host name.
+
+#### Installation
+
+To get this box running:
+1. clone the reproducible
+2. make sure you are on the root of the project and can see the vagrantfile 3. then run:
+```bash
+vagrant up
+```
+
+Now you can see nginx running on 2 locations:
+- ip: 192.168.10.100
+- development.local/
+
+#### What is an environment?
+An environment is a location where code runs and data lives.
+
+Github is not an environment really, maybe Github pages.
+
+Your machine is an environment because code runs and you develop software and web apps and other apps.
+
+What environments are there?
+
+Developments:
+where you write your code, Py, Sql, Html - i.e. computer
+Testing:
+external, has its own tools and infrastructure that runs the code
+Production:
+Code pipelines: move between the environments.
+
+Testing: ensures functionality and quality of the website.
+
+Objective: increase speed of learning and developing -> increase feedback loops -> increase innovation.
+
+#### Dev environment
+
+A set of processes and tools that are used to develop a source code or program.
+
+#### 4 pillars of DevOps
+
+Ease of use: everyone on the team will use this, which is why documentation is important.
+Flexibility: things change at incredible rate, you don't want to change that fast but adapt accordingly.
+Robustness: we need 100% uptime, fast and robust deployment
+Cost: cost of downtime, cost of slow innovation, cost of time to market, cost of infrastructure
+
+#### DevOps problems and solutions
+
+"It's working on my computer" - this is the main issue in DevOps, to avoid this you must standardise the environment.
+
+## Vagrant & Virtual Box
+
+### Vagrant
+
+Vagrant enables users to create and configure lightweight, reproducible and portable development environments, e.g. VirtualBox, KVM, Docker.
+
+### Virtual Box
+
+Developed by Oracle Corporation, VirtualBox is a free and open-source hosted hypervisors for x86 virtualization. It allows users and administrators to easily run multiple guest operating systems on a single host.  
+
+### Package manager
+Package manager system is a collection of software tools that automates the process of installing, upgrading, configuring and removing computer programs for a computer's operating system in a consistent manner.
+
+## what is python's package manager?
+Python Package Manager (PyPM) - pip
+
+
+## what is ubuntu's package manager?
+ Debian Package Management System, Red Hat Package Manager, Pacman Package Manager, Zypper Package Manager, Portage Package Manage
+
+## Steps:
+vagrant init ubuntu/xenial64
+
+vagrant up
+
+put console.log in gitignore
+
+vagrant ssh
+
+sudo apt-get update -y
+
+sudo apt-get install nginx -y
+
+sudo systemctl start nginx
 ```
 
 
